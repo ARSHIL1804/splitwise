@@ -1,0 +1,14 @@
+{
+	"name": "Splitwise",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "workspace",
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
+    "extensions": [
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-docker",
+        "bierner.markdown-mermaid",
+        "postman.postman-for-vscode"
+    ],
+    "remoteUser": "root"
+}
