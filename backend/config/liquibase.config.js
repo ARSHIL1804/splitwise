@@ -4,7 +4,7 @@ const { Liquibase, MariaDBDatabase } = require('liquibase');
 console.log(Liquibase)
 const myConfig = {
     changeLogFile: 'database/db.changelog-master.xml',
-    url: 'jdbc:mariadb://mariadb:3306/splitwise',
+    url: 'jdbc:mariadb://localhost:3306/splitwise',
     username: 'user',
     password: 'password',
     classpath : 'liquibase/mariadb-java-client-3.5.3.jar',

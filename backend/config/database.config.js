@@ -8,6 +8,16 @@ async function getReadOnlyConnection() {
   try {
     if (!readonlyConnection) {
 
+      console.log(       {
+        host: process.env.DB_HOST,
+        user: process.env.DB_READONLY_USER,
+        password: process.env.DB_READONLY_USER_PASSWORD,
+        database: process.env.DATABASE,
+        charset: 'utf8mb4',  
+        connectAttributes: {
+          collation: 'utf8mb4_unicode_ci'
+        }
+      })
       readonlyConnection = await mariadb.createConnection(
         {
           host: process.env.DB_HOST,
@@ -31,7 +41,12 @@ async function getReadOnlyConnection() {
 async function getReadWriteConnection() {
   try {
     if (!readWriteConnection) {
-
+      console.log(        {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_USER_PASSWORD,
+        database: process.env.DATABASE
+      })
       readWriteConnection = await mariadb.createConnection(
         {
           host: process.env.DB_HOST,

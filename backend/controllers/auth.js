@@ -11,7 +11,8 @@ async function register(req, res) {
     const passwordHash = await hashPassword(data.password);
     console.log(passwordHash);
     const parameters = [data.username, data.email, passwordHash, data.phone, data.profileImage, data.currency];
-    await DatabaseIO.Query(spname, parameters);
+    const resp = await DatabaseIO.Query(spname, parameters);
+    console.log(resp)
     res.send(200)
 }
 

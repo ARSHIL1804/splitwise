@@ -38,6 +38,7 @@ BEGIN
     END IF;
     
     START TRANSACTION;
+        Select 1 into _emailExists;
 
         INSERT INTO User (GUID, email, userName, password, phone, profileImage, currency, createdAt, updatedAt)
         VALUES (uuid(), inEmail, inUserName, inPassword, inPhone, inProfileImage, inCurrency, utc_timestamp(), utc_timestamp());
