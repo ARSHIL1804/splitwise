@@ -1,38 +1,27 @@
 const mariadb = require('mariadb');
+const LogFactory = require('../logging/logger');
 
 let readonlyConnection, readWriteConnection;
-
-
 
 async function getReadOnlyConnection() {
   try {
     if (!readonlyConnection) {
-
-      console.log(       {
-        host: process.env.DB_HOST,
-        user: process.env.DB_READONLY_USER,
-        password: process.env.DB_READONLY_USER_PASSWORD,
-        database: process.env.DATABASE,
-        charset: 'utf8mb4',  
-        connectAttributes: {
-          collation: 'utf8mb4_unicode_ci'
-        }
-      })
       readonlyConnection = await mariadb.createConnection(
         {
-          host: process.env.DB_HOST,
+          host: process.env.DB_HOST + "b",
           user: process.env.DB_READONLY_USER,
           password: process.env.DB_READONLY_USER_PASSWORD,
           database: process.env.DATABASE,
           charset: 'utf8mb4',  
           connectAttributes: {
             collation: 'utf8mb4_unicode_ci'
-          }
+          },
+          multipleStatements: true 
         });
     }
     return readonlyConnection;
   } catch(e) {
-    console.log(e, ' Error in initiating connection1')
+    LogFactory.Error(e, ' Error in initiating connection');
   }
 }
 
@@ -41,23 +30,22 @@ async function getReadOnlyConnection() {
 async function getReadWriteConnection() {
   try {
     if (!readWriteConnection) {
-      console.log(        {
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_USER_PASSWORD,
-        database: process.env.DATABASE
-      })
       readWriteConnection = await mariadb.createConnection(
         {
-          host: process.env.DB_HOST,
+          host: process.env.DB_HOST + "B",
           user: process.env.DB_USER,
           password: process.env.DB_USER_PASSWORD,
-          database: process.env.DATABASE
+          database: process.env.DATABASE,
+          charset: 'utf8mb4',  
+          connectAttributes: {
+            collation: 'utf8mb4_unicode_ci'
+          },
+          multipleStatements: true 
         });
     }
     return readWriteConnection;
   } catch (e){
-    console.log(e, ' Error in initiating connection2')
+    LogFactory.Error(e, ' Error in initiating connection');
   }
 }
 

@@ -2,6 +2,7 @@
 
 const app = require('./app');
 const http = require('http');
+const LogFactory = require('./logging/logger');
 
 // Load environment variables
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ const server = http.createServer(app);
 server.listen(PORT, () => {
   console.log(`Server running in ${NODE_ENV} mode on port ${PORT}`);
   console.log(`API available at http://localhost:${PORT}`);
+  LogFactory.Info('Server Started');
 });
 
 // Handle unhandled promise rejections

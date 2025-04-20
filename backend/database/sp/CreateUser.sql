@@ -45,7 +45,7 @@ BEGIN
 
         SELECT LAST_INSERT_ID() INTO _userId;
 
-        SELECT GUID, _userId, _userNameExists from User where id = _userId;
+        SELECT id, GUID, userName, email from User where id = _userId;
 
     COMMIT;
 END

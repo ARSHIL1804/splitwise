@@ -1,7 +1,7 @@
 const { Liquibase, MariaDBDatabase } = require('liquibase');
 
 
-console.log(Liquibase)
+(Liquibase)
 const myConfig = {
     changeLogFile: 'database/db.changelog-master.xml',
     url: 'jdbc:mariadb://localhost:3306/splitwise',

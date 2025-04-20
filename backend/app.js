@@ -5,12 +5,11 @@ const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
-
-// const { errorHandler } = require('./middleware/errorHandler');
-// const { logger } = require('./middleware/logger');
+const errorHandler = require('./middleware/error-handler');
 
 // Import routes
 const authRoutes = require('./routes/auth');
+const { requestHandler } = require('./middleware/middleware');
 // const userRoutes = require('./routes/userRoutes');
 // const groupRoutes = require('./routes/groupRoutes');
 // const expenseRoutes = require('./routes/expenseRoutes');
@@ -42,7 +41,9 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 // app.use(passport.initialize());
 
 // API routes
+app.use(requestHandler);
 app.use('/api/auth', authRoutes);
+app.use(errorHandler);
 
 // app.use('/api/users', userRoutes);
 // app.use('/api/groups', groupRoutes);

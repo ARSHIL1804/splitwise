@@ -12,14 +12,21 @@ class DatabaseIO {
             const connection = isReadOnly ? await getpReadOnlyConnection() : await getReadWriteConnection();
 
             const query = format(DatabaseIO._SPCallTemplate, spname, placeholders);
-
-            console.log(connection, query);
-
-            const [res] = await connection.query(query, parameters);
-            return res[0];
+            const queryOutput = await connection.query(query, parameters);
+            const response = DatabaseIO.BuildDatabaseResponse(queryOutput);
+            return response;
         } catch (error) {
-            console.log(error, error.sqlMessage)
+            return error.sqlMessage;
         }
+    }
+
+
+    static BuildDatabaseResponse(databaseRes){
+        let response = []
+        for(var i=0; i <= databaseRes.length - 2; i++){
+            response.push(databaseRes[i][0]);
+        }
+        return response;
     }
 }
 
